@@ -1,5 +1,5 @@
 from colorama import Fore
-from word_generator import *
+# from word_generator import *
 import requests
 import sys
 
@@ -168,11 +168,15 @@ def text_wordle():
         guess = str(input("\nYour guess: "))
         board._guesses.append(guess)
         board.update_squares()
-        print(board._guesses)
+        attempts_left = str(5 - attempts)
+        print('You have ' + attempts_left + ' attempts remaining')
         display_board(board, board._guesses)
         attempts += 1 
 
-    print('Game over!')
+    if game_won(board._guesses, board._word):
+        print('Congratulations! You guessed the word correctly!')
+    else:
+        print('Game over! The correct word was ' + random_word)
 
 
 if __name__ == "__main__":
